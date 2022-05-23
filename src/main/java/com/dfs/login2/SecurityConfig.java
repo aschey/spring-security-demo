@@ -15,13 +15,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-        .csrf(c -> c.disable())
-        .antMatcher("/login")
-        .addFilterAfter(new CacheFilter(), BasicAuthenticationFilter.class)
-        .addFilterAfter(new MobileAuthFilter(new MobileAuthenticationManager()), BasicAuthenticationFilter.class)
-        .addFilterAfter(new UsernamePasswordFilter(new UsernamePasswordAuthenticationManager()), BasicAuthenticationFilter.class)
-        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and()
-        .build();
+            .csrf(c -> c.disable())
+            .antMatcher("/login")
+            .addFilterAfter(new CacheFilter(), BasicAuthenticationFilter.class)
+            .addFilterAfter(new MobileAuthFilter(new MobileAuthenticationManager()), BasicAuthenticationFilter.class)
+            .addFilterAfter(new UsernamePasswordFilter(new UsernamePasswordAuthenticationManager()), BasicAuthenticationFilter.class)
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .build();
     }
 }
