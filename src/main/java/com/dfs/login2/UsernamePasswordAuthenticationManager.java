@@ -1,6 +1,8 @@
 package com.dfs.login2;
 
 import java.util.ArrayList;
+
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -11,7 +13,6 @@ public class UsernamePasswordAuthenticationManager implements AuthenticationMana
     @Override
     public Authentication authenticate(Authentication authentication) 
       throws AuthenticationException {
-      
         var name = authentication.getName();
         var password = authentication.getCredentials().toString();
         // Call auth API
@@ -20,7 +21,7 @@ public class UsernamePasswordAuthenticationManager implements AuthenticationMana
                 name, password, new ArrayList<>());
         } 
         else {
-            throw new CustomAuthenticationException("auth failure");
+            throw new AccessDeniedException("auth failure");
         }
     }
 }
